@@ -17,14 +17,14 @@
   "require-dev": {
     "squizlabs/php_codesniffer": "3.*",
     "phpcompatibility/phpcompatibility-wp": "*",
-    "wp-coding-standards/wpcs": "*@dev"
+    "wp-coding-standards/wpcs": "dev-develop"
   },
 
   "scripts": {
     "composer:install": "@composer install --ignore-platform-reqs --no-interaction",
     "composer:update": [
       "@composer clear-cache",
-      "@composer update --no-interaction"
+      "@composer update --prefer-stable --no-interaction"
     ]
   },
   "config": {
