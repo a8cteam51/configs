@@ -15,14 +15,16 @@
     "php": ">=7.4"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "3.*"
+    "squizlabs/php_codesniffer": "3.*",
+    "phpcompatibility/phpcompatibility-wp": "*",
+    "wp-coding-standards/wpcs": "*@dev"
   },
 
   "scripts": {
     "composer:install": "@composer install --ignore-platform-reqs --no-interaction",
     "composer:update": [
       "@composer clear-cache",
-      "@composer update --prefer-stable --no-interaction"
+      "@composer update --no-interaction"
     ]
   },
   "config": {
