@@ -31,4 +31,22 @@
 			<property name="blank_line_check" value="true"/>
 		</properties>
 	</rule>
+
+	<!-- Checks for @param, @return and @throws tags -->
+	<rule ref="Squiz.Commenting.FunctionComment">
+		<properties>
+			<property name="skipIfInheritdoc" value="true" />
+		</properties>
+	</rule>
+
+	<rule ref="Squiz.Commenting.ClassComment">
+		<!-- Needed so we ignore the presence of @version and @since tags -->
+		<exclude name="Squiz.Commenting.ClassComment.TagNotAllowed" />
+	</rule>
+
+	<!-- Ensure each function has a description -->
+	<rule ref="Generic.Commenting.DocComment">
+		<exclude name="Generic.Commenting.DocComment.TagValueIndent" />
+		<exclude name="Generic.Commenting.DocComment.ParamNotFirst" />
+	</rule>
 </ruleset>
