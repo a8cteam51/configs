@@ -32,21 +32,25 @@
 		</properties>
 	</rule>
 
-	<!-- Checks for @param, @return and @throws tags -->
+	<!-- Ensure documentation blocks follow basic formatting like containing a short description and not mixing tag groups. -->
+	<rule ref="Generic.Commenting.DocComment">
+		<!-- Ignore indentation as it conflicts with our attempts to align across multiple tag blocks. -->
+		<exclude name="Generic.Commenting.DocComment.TagValueIndent" />
+		<!-- Ignore @param tags not being first since normally start with @since and @version tags. -->
+		<exclude name="Generic.Commenting.DocComment.ParamNotFirst" />
+	</rule>
+
+	<!-- Check that function comments exist and that they contain @param, @return and @throws tags. -->
 	<rule ref="Squiz.Commenting.FunctionComment">
 		<properties>
+			<!-- Ignore this sniff if @inheritDoc is present. -->
 			<property name="skipIfInheritdoc" value="true" />
 		</properties>
 	</rule>
 
+	<!-- Check that class comments exists. -->
 	<rule ref="Squiz.Commenting.ClassComment">
-		<!-- Needed so we ignore the presence of @version and @since tags -->
+		<!-- Ignore the presence of tags such as @version and @since. -->
 		<exclude name="Squiz.Commenting.ClassComment.TagNotAllowed" />
-	</rule>
-
-	<!-- Ensure each function has a description -->
-	<rule ref="Generic.Commenting.DocComment">
-		<exclude name="Generic.Commenting.DocComment.TagValueIndent" />
-		<exclude name="Generic.Commenting.DocComment.ParamNotFirst" />
 	</rule>
 </ruleset>
