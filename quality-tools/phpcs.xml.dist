@@ -43,7 +43,7 @@
 	<!-- Check that function comments exist and that they contain @param, @return and @throws tags. -->
 	<rule ref="Squiz.Commenting.FunctionComment">
 		<properties>
-			<!-- Ignore this sniff if @inheritDoc is present. -->
+			<!-- Ignore missing tags if @inheritDoc is present. -->
 			<property name="skipIfInheritdoc" value="true" />
 		</properties>
 	</rule>
