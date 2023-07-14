@@ -47,6 +47,7 @@
 			<property name="skipIfInheritdoc" value="true" />
 		</properties>
 		<!-- Ignore missing type hints since we sometimes want to ignore them on hooks. -->
+		<exclude name="Squiz.Commenting.FunctionComment.TypeHintMissing"/>
 		<exclude name="Squiz.Commenting.FunctionComment.ScalarTypeHintMissing"/>
 	</rule>
 
