@@ -42,7 +42,8 @@ class ScopePhpDependencies {
 		foreach ( $autoloaded_files as $file ) {
 			$file = dirname( $vendor_dir ) . DIRECTORY_SEPARATOR . $file;
 			if ( ! file_exists( $file ) ) {
-				if ( ! mkdir( $file_directory = dirname( $file ), 0755, true ) && ! is_dir( $file_directory ) ) {
+				$file_directory = dirname( $file );
+				if ( ! is_dir( $file_directory ) && ! mkdir( $file_directory , 0755, true ) && ! is_dir( $file_directory ) ) {
 					throw new \RuntimeException( sprintf( 'Directory "%s" was not created', $file_directory ) );
 				}
 				if ( ! touch( $file ) ) {
@@ -53,10 +54,8 @@ class ScopePhpDependencies {
 
 		foreach ( $autoloaded_directories as $directory ) {
 			$directory = dirname( $vendor_dir ) . DIRECTORY_SEPARATOR . $directory;
-			if ( ! file_exists( $directory ) ) {
-				if ( ! mkdir( $directory, 0755, true ) && ! is_dir( $directory ) ) {
-					throw new \RuntimeException( sprintf( 'Directory "%s" was not created', $directory ) );
-				}
+			if ( ! is_dir( $directory ) && ! mkdir( $directory, 0755, true ) && ! is_dir( $directory ) ) {
+				throw new \RuntimeException( sprintf( 'Directory "%s" was not created', $directory ) );
 			}
 		}
 	}
