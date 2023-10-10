@@ -12,11 +12,20 @@
   ],
 
   "require": {
-    "php": ">=7.4"
+    "php": ">=7.4",
+    "ext-json": "*"
   },
   "require-dev": {
+    "composer/composer": "^2.6",
+
     "wp-coding-standards/wpcs": "^3",
     "phpcompatibility/phpcompatibility-wp": "*"
+  },
+
+  "autoload": {
+    "classmap": [
+      "composer"
+    ]
   },
 
   "scripts": {
