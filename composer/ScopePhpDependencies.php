@@ -10,8 +10,8 @@ use Composer\Script\Event;
 class ScopePhpDependencies {
 	/**
 	 * When running the PHP scoper, the Composer autoloader will be executed first. However, that will throw a fatal
-	 * error if it contains individual files that are not scoped and which haven't been generated yet (e.g., when installing
-	 * the packages immediately after cloning the repository).
+	 * error if it contains files and directories that are scoped and which haven't been generated yet (e.g., when installing
+	 * the packages immediately after cloning the repository). Particularly, the `files` and `classmap` autoloaders are affected.
 	 *
 	 * This method is meant to ensure that any such files exist before the autoloader is executed to prevent
 	 * 'file-not-found' fatal errors.
