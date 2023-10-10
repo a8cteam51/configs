@@ -27,7 +27,7 @@ class ScopePhpDependencies {
 		$console_io = $event->getIO();
 		$vendor_dir = $event->getComposer()->getConfig()->get( 'vendor-dir' );
 
-		$console_io->info( 'Making sure autoloaded files exist...' );
+		$console_io->write( 'Making sure autoloaded files exist...' );
 
 		$composer_config = file_get_contents( dirname( $vendor_dir ) . '/composer.json' );
 		$composer_config = json_decode( $composer_config, true, 512, JSON_THROW_ON_ERROR );
@@ -77,11 +77,11 @@ class ScopePhpDependencies {
 			return;
 		}
 		if ( ! is_file( $vendor_dir . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'php-scoper' ) ) {
-			$console_io->info( 'Not scoping dependencies because the PHP scoper is not installed.' );
+			$console_io->write( 'Not scoping dependencies because the PHP scoper is not installed.' );
 			return;
 		}
 
-		$console_io->info( 'Scoping dependencies...' );
+		$console_io->write( 'Scoping dependencies...' );
 
 		$event_dispatcher = $event->getComposer()->getEventDispatcher();
 		$event_dispatcher->dispatchScript( 'scope-php-dependencies', $event->isDevMode() );
