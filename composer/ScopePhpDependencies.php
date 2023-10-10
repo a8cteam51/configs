@@ -5,15 +5,16 @@ namespace WPCOMSpecialProjects\Config\Composer;
 use Composer\Script\Event;
 
 /**
- * Static Composer commands to be executed on certain script events to scope dependencies after every update.
+ * Static Composer commands to be executed on certain script events to scope PHP dependencies after every update.
  */
-class ScopeDependencies {
+class ScopePhpDependencies {
 	/**
 	 * When running the PHP scoper, the Composer autoloader will be executed first. However, that will throw a fatal
 	 * error if it contains individual files that are not scoped and which haven't been generated yet (e.g., when installing
 	 * the packages immediately after cloning the repository).
 	 *
-	 * This method is meant to ensure that any such files exist before the autoloader is executed to prevent the fatal errors.
+	 * This method is meant to ensure that any such files exist before the autoloader is executed to prevent
+	 * 'file-not-found' fatal errors.
 	 *
 	 * @param   Event   $event  Composer event object.
 	 *
@@ -26,7 +27,7 @@ class ScopeDependencies {
 		$console_io = $event->getIO();
 		$vendor_dir = $event->getComposer()->getConfig()->get( 'vendor-dir' );
 
-		$console_io->write( 'Making sure autoloaded files exist...' );
+		$console_io->info( 'Making sure autoloaded files exist...' );
 
 		$composer_config = file_get_contents( dirname( $vendor_dir ) . '/composer.json' );
 		$composer_config = json_decode( $composer_config, true, 512, JSON_THROW_ON_ERROR );
@@ -58,5 +59,32 @@ class ScopeDependencies {
 				}
 			}
 		}
+	}
+
+	/**
+	 * The PHP scoper and the to-be-scoped packages only exist in the development environment so this method acts
+	 * as a wrapper to scope the dependencies only when needed, and always after the packages have been installed or updated.
+	 *
+	 * @param   Event   $event  Composer event object.
+	 *
+	 * @return  void
+	 */
+	public static function postAutoloadDump( Event $event ): void {
+		$console_io = $event->getIO();
+		$vendor_dir = $event->getComposer()->getConfig()->get( 'vendor-dir' );
+
+		if ( ! $event->isDevMode() ) {
+			$console_io->warning( 'Not scoping dependencies because this is not a development environment.' );
+			return;
+		}
+		if ( ! is_file( $vendor_dir . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'php-scoper' ) ) {
+			$console_io->info( 'Not scoping dependencies because the PHP scoper is not installed.' );
+			return;
+		}
+
+		$console_io->info( 'Scoping dependencies...' );
+
+		$event_dispatcher = $event->getComposer()->getEventDispatcher();
+		$event_dispatcher->dispatchScript( 'scope-php-dependencies', $event->isDevMode() );
 	}
 }
