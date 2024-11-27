@@ -16,7 +16,7 @@
     "ext-json": "*"
   },
   "require-dev": {
-    "composer/composer": "^2.6",
+    "composer/composer": "^2",
 
     "wp-coding-standards/wpcs": "^3",
     "phpcompatibility/phpcompatibility-wp": "*"
@@ -32,7 +32,7 @@
     "composer:install": "@composer install --ignore-platform-reqs --no-interaction",
     "composer:update": [
       "@composer clear-cache",
-      "@composer update --prefer-stable --no-interaction"
+      "@composer update --prefer-stable --ignore-platform-reqs --no-interaction"
     ]
   },
   "config": {
