@@ -10,7 +10,7 @@ foreach ( array( 'dependencies' ) as $discoverDirectory ) {
 	}
 }
 
-foreach ( array( "$maybePluginFile.php", 'bootstrap.php', 'functions.php' ) as $analyzeFile ) {
+foreach ( array( "$maybePluginFile.php", 'functions-bootstrap.php', 'functions.php' ) as $analyzeFile ) {
 	if ( is_file( $workingDirectory . '/' . $analyzeFile ) ) {
 		$config['parameters']['paths'][] = $workingDirectory . '/' . $analyzeFile;
 	}
