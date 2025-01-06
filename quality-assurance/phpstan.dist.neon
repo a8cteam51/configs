@@ -2,7 +2,7 @@ includes:
     - phpstan.dist.neon.php
 
 parameters:
-    level: max
+    level: 8
     inferPrivatePropertyTypeFromConstructor: true
     treatPhpDocTypesAsCertain: false
     bootstrapFiles:
