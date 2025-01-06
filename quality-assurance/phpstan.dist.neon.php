@@ -2,7 +2,7 @@
 
 $config = array();
 $workingDirectory = getcwd();
-$maybePluginFile = dirname( $workingDirectory );
+$maybePluginFile = basename( $workingDirectory );
 
 foreach ( array( 'dependencies' ) as $discoverDirectory ) {
 	if ( is_dir( $workingDirectory . '/' . $discoverDirectory ) ) {
