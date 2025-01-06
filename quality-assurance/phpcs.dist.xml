@@ -47,6 +47,8 @@
 		<exclude name="Squiz.Commenting.FileComment.Missing"/>
 		<!-- Ignore end char rule since it conflicts with PhpStorm's code folding regions. -->
 		<exclude name="Squiz.Commenting.InlineComment.InvalidEndChar" />
+		<!-- Exclude Block Editor pattern since they require special headers. -->
+		<exclude-pattern>*/patterns/*</exclude-pattern>
 	</rule>
 
 	<!-- Ignore missing tags if @inheritDoc is present. -->
